@@ -17,9 +17,12 @@ export const MovieRow = ({ movieType, title }: MovieRowProps) => {
     <div className="mt-16">
       <div className="flex justify-between items-center mb-8">
         <p className="text-3xl font-bold">{title}</p>
-        <p className="text-lg font-bold text-red-500 cursor-pointer">
-          Передивитись всі
-        </p>
+        <a
+          href={`movies/${movieType}`}
+          className="underline text-lg font-bold text-red-500 cursor-pointer"
+        >
+          Подивитись всі
+        </a>
       </div>
       <ScrollArea>
         <div className="flex w-max space-x-4">

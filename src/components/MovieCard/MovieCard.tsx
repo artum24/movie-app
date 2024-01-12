@@ -2,6 +2,7 @@ import { Card, CardContent, CardTitle } from "@app/components/ui/card";
 import { GenreType, MovieType } from "@app/types/movie";
 import { ProgressBar } from "@app/components/ProgressBar/ProgressBar";
 import { genresFormatter } from "@app/utils/genresFormatter";
+import Image from "next/image";
 
 type MovieCardProps = {
   movie: MovieType;
@@ -11,9 +12,12 @@ type MovieCardProps = {
 export const MovieCard = ({ movie, movieGenres }: MovieCardProps) => {
   return (
     <Card className="relative cursor-pointer shadow-2xl">
-      <img
+      <Image
+        width={300}
+        height={450}
         alt={movie.title}
-        className="w-full rounded-xl shadow-2xl"
+        priority
+        className="rounded-xl shadow-2xl"
         src={`https://www.themoviedb.org/t/p/w300_and_h450_bestv2${movie.poster_path}`}
       />
       <CardContent
