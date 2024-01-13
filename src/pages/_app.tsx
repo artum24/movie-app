@@ -4,6 +4,7 @@ import { Inter as FontSans } from "next/font/google";
 import { Header } from "@app/components/Header/Header";
 import dayjs from "dayjs";
 import ukLocale from "dayjs/locale/uk";
+import { SpeedInsights } from '@vercel/speed-insights/next';
 
 export const fontSans = FontSans({
   subsets: ["latin"],
@@ -17,6 +18,7 @@ export default function App({ Component, pageProps }: AppProps) {
     <div>
       <Header />
       <Component {...pageProps} />
+      <SpeedInsights />
     </div>
   );
 }
