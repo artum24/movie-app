@@ -1,4 +1,8 @@
-export const headerLinks = [
+import { MoviePageType } from "@app/types/movies/params";
+
+type HeaderLink = {type: MoviePageType, name: string, path: string}
+
+export const headerLinks: HeaderLink[] = [
   {
     type: "popular",
     name: "Популярні",
