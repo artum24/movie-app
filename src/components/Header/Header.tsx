@@ -7,17 +7,17 @@ export const Header = () => {
   const headerLinks = [
     {
       title: "Програються",
-      path: "/now-playing",
+      path: "/movies/now-playing",
     },
     {
       title: "Популярні",
-      path: "/popular",
+      path: "/movies/popular",
     },
     {
       title: "Топ оцінка",
-      path: "top-rated",
+      path: "/movies/top-rated",
     },
-    { title: "Скоро в кіно", path: "upcoming" },
+    { title: "Скоро в кіно", path: "/movies/upcoming" },
   ];
   return (
     <div className="mt-2">
@@ -28,7 +28,7 @@ export const Header = () => {
         <div className="flex gap-5">
           {headerLinks.map((link, index) => (
             <Fragment key={link.title}>
-              <Link href={`movies/${link.path}`}>{link.title}</Link>
+              <Link href={link.path}>{link.title}</Link>
               {index !== headerLinks.length - 1 && (
                 <Separator className="h-8" orientation="vertical" />
               )}

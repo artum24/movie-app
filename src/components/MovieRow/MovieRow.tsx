@@ -4,12 +4,14 @@ import { useGenres } from "@app/lib/api/useGenres";
 import { GenreType } from "@app/types/movie";
 import { ScrollArea, ScrollBar } from "../ui/scroll-area";
 import { MovieSkeletonCard } from "@app/components/MovieCard/MovieSkeletonCard";
+import Link from "next/link";
 
 type MovieRowProps = {
   movieType: string;
   title: string;
+  path: string;
 };
-export const MovieRow = ({ movieType, title }: MovieRowProps) => {
+export const MovieRow = ({ movieType, title, path }: MovieRowProps) => {
   const { data: genresData } = useGenres();
   const { data, isLoading } = useGetMoviesByType(movieType);
 
@@ -17,12 +19,12 @@ export const MovieRow = ({ movieType, title }: MovieRowProps) => {
     <div className="mt-16">
       <div className="flex justify-between items-center mb-8">
         <p className="text-3xl font-bold">{title}</p>
-        <a
-          href={`movies/${movieType}`}
+        <Link
+          href={path}
           className="underline text-lg font-bold text-red-500 cursor-pointer"
         >
           Подивитись всі
-        </a>
+        </Link>
       </div>
       <ScrollArea>
         <div className="flex w-max space-x-4">
