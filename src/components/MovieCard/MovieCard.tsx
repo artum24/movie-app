@@ -7,9 +7,10 @@ import Image from "next/image";
 type MovieCardProps = {
   movie: MovieType;
   movieGenres: GenreType[];
+  imageStyles?: string;
 };
 
-export const MovieCard = ({ movie, movieGenres }: MovieCardProps) => {
+export const MovieCard = ({ movie, movieGenres, imageStyles }: MovieCardProps) => {
   return (
     <Card className="relative cursor-pointer shadow-2xl">
       <Image
@@ -17,7 +18,7 @@ export const MovieCard = ({ movie, movieGenres }: MovieCardProps) => {
         height={450}
         alt={movie.title}
         priority
-        className="rounded-xl shadow-2xl"
+        className={`rounded-xl shadow-2xl ${imageStyles || ''}`}
         src={`https://www.themoviedb.org/t/p/w300_and_h450_bestv2${movie.poster_path}`}
       />
       <CardContent

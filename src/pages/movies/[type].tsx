@@ -57,6 +57,7 @@ export default function Home() {
             });
             return (
               <MovieCard
+                imageStyles="w-full"
                 movieGenres={movieGenres}
                 movie={movie}
                 key={movie.id}
