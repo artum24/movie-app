@@ -8,7 +8,7 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@app/components/ui/sheet";
-import { GenreType } from "@app/types/movie";
+import { GenreType } from "@app/types/movies/movie";
 import { Button } from "@app/components/ui/button";
 import {
   Accordion,

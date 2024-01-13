@@ -1,19 +1,26 @@
 import { useState } from "react";
-import { GenreType } from "@app/types/movie";
+import { GenreType } from "@app/types/movies/movie";
 import { MovieCard } from "@app/components/MovieCard/MovieCard";
 import { MovieSkeletonCard } from "@app/components/MovieCard/MovieSkeletonCard";
 import { Filter, MovieFilter } from "@app/components/MovieFilter/MovieFilter";
-import { useMovies } from "@app/lib/api/useMovies";
 import { useGenres } from "@app/lib/api/useGenres";
 import { MoviePagination } from "@app/components/MoviePagination/MoviePagination";
+import { useGetMoviesByType } from "@app/lib/api/useGetMoviesByType";
+import { useRouter } from "next/router";
+import { GetServerSideProps } from "next";
+import { MoviePageType } from "@app/types/movies/params";
 
 export default function Home() {
+  const {query} = useRouter()
   const [filter, setFilter] = useState<Filter>({ genres: [] });
   const [page, setPage] = useState(1);
-  const { data: moviesData, isLoading: movieLoading } = useMovies({
-    page,
+
+  const { data: moviesData, isLoading: movieLoading } = useGetMoviesByType({
     genres: filter.genres,
+    searchType: query?.type as MoviePageType,
+    page
   });
+
   const { data: genresData, isLoading: genreLoading } = useGenres();
 
   const onChangePage = (page: number) => {
@@ -66,4 +73,15 @@ export default function Home() {
       )}
     </main>
   );
+}
+
+export const getServerSideProps: GetServerSideProps = async (context) => {
+  const  type = context.params?.type as string;
+  const availableMoviesPageType = ['top-rated','popular', 'upcoming' ]
+  if (!availableMoviesPageType.includes(type)) {
+    return {
+      notFound: true,
+    }
+  }
+  return {props: {}}
 }

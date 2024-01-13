@@ -42,7 +42,7 @@ export const ProgressBar = ({ value }: ProgressBarProps) => {
         y="60%"
         className="text-center text-gray-600 text-sm font-bold"
       >
-        {value}
+        {value.toFixed(1)}
       </text>
     </svg>
   );

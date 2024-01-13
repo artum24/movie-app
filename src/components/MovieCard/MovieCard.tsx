@@ -1,5 +1,5 @@
 import { Card, CardContent, CardTitle } from "@app/components/ui/card";
-import { GenreType, MovieType } from "@app/types/movie";
+import { GenreType, MovieType } from "@app/types/movies/movie";
 import { ProgressBar } from "@app/components/ProgressBar/ProgressBar";
 import { genresFormatter } from "@app/utils/genresFormatter";
 import Image from "next/image";

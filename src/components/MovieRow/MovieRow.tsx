@@ -1,19 +1,20 @@
 import { useGetMoviesByType } from "@app/lib/api/useGetMoviesByType";
 import { MovieCard } from "@app/components/MovieCard/MovieCard";
 import { useGenres } from "@app/lib/api/useGenres";
-import { GenreType } from "@app/types/movie";
+import { GenreType } from "@app/types/movies/movie";
 import { ScrollArea, ScrollBar } from "../ui/scroll-area";
 import { MovieSkeletonCard } from "@app/components/MovieCard/MovieSkeletonCard";
 import Link from "next/link";
+import { MoviePageType } from "@app/types/movies/params";
 
 type MovieRowProps = {
-  movieType: string;
+  movieType: MoviePageType;
   title: string;
   path: string;
 };
 export const MovieRow = ({ movieType, title, path }: MovieRowProps) => {
   const { data: genresData } = useGenres();
-  const { data, isLoading } = useGetMoviesByType(movieType);
+  const { data, isLoading } = useGetMoviesByType({searchType: movieType});
 
   return (
     <div className="mt-16">

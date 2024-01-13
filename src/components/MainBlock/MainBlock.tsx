@@ -3,7 +3,6 @@ import dayjs from "dayjs";
 import { genresFormatter } from "@app/utils/genresFormatter";
 export const MainBlock = () => {
   const { data } = useDetailMovie(572802);
-  console.log(data);
   // https://www.themoviedb.org/t/p/w1920_and_h800_multi_faces/yl2GfeCaPoxChcGyM5p7vYp1CKS.jpg
   return (
     <div>

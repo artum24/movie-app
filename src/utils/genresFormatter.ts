@@ -1,4 +1,4 @@
-import { GenreType } from "@app/types/movie";
+import { GenreType } from "@app/types/movies/movie";
 
 export const genresFormatter = (movieGenres: GenreType[]) =>
   movieGenres.map(

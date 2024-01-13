@@ -1,23 +1,10 @@
 import { instance } from "@app/lib/api/axios.config";
-import { MovieRequest } from "@app/pages/api/movies";
+import { MovieParamsType } from "@app/types/movies/params";
 
-export const getMovies = ({ page, genres }: MovieRequest) =>
+export const getMovies = (params: MovieParamsType) =>
   instance.get(
-    `discover/movie?page=${page}&language=uk${
-      genres ? `&with_genres=${genres}` : ""
-    }`,
+    `discover/movie`,{params}
   );
-
-export const getNowPlayingMovies = () =>
-  instance.get(`movie/now_playing?language=uk`);
-
-export const getPopularMovies = () => instance.get(`movie/popular?language=uk`);
-
-export const getTopRatedMovies = () =>
-  instance.get(`movie/top_rated?language=uk`);
-
-export const getUpcomingMovies = () =>
-  instance.get(`movie/upcoming?language=uk`);
 
 export const getMovieDetail = (id: string) =>
   instance.get(`movie/${id}?language=uk`);

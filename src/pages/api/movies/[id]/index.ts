@@ -1,7 +1,7 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 import type { NextApiRequest, NextApiResponse } from "next";
 import { getMovieDetail } from "@app/lib/api/fetch";
-import { MovieDetailType } from "@app/types/movie";
+import { MovieDetailType } from "@app/types/movies/movie";
 
 export default async function handler(
   req: NextApiRequest,

@@ -1,7 +1,7 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 import type { NextApiRequest, NextApiResponse } from "next";
 import { getGenres } from "@app/lib/api/fetch";
-import { GenreType } from "@app/types/movie";
+import { GenreType } from "@app/types/movies/movie";
 
 export type GenresResponse = {
   genres: GenreType[];
