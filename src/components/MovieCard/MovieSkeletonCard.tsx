@@ -11,7 +11,7 @@ export const MovieSkeletonCard = ({
 }: MovieSkeletonCardProps) => {
   return (
     <Skeleton
-      className={`relative h-${height || 96} w-${width || "full"} rounded-xl`}
+      className={`relative ${height ? "h-[28rem]" : "h-96"} ${width ? "w-80" : "w-full"} rounded-xl`}
     >
       <Skeleton className="absolute h-36 w-full bottom-0 px-3 py-3 flex flex-col justify-between">
         <Skeleton className=" w-100 h-8" />
