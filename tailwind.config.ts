@@ -17,6 +17,9 @@ const config: Config = {
       fontFamily: {
         sans: ["var(--font-sans)", ...fontFamily.sans],
       },
+      height: {
+        "112": "28rem",
+      },
     },
   },
   plugins: [],

@@ -1,16 +1,24 @@
 import { Skeleton } from "@app/components/ui/skeleton";
 
-export const MovieSkeletonCard = () => {
+type MovieSkeletonCardProps = {
+  width?: number;
+  height?: number;
+};
+
+export const MovieSkeletonCard = ({
+  width,
+  height,
+}: MovieSkeletonCardProps) => {
   return (
-    <Skeleton className=" relative h-96 w-72 rounded-xl">
+    <Skeleton
+      className={`relative h-${height || 96} w-${width || "full"} rounded-xl`}
+    >
       <Skeleton className="absolute h-36 w-full bottom-0 px-3 py-3 flex flex-col justify-between">
         <Skeleton className=" w-100 h-8" />
-        <div className="flex justify-between mt-3">
-          <Skeleton className="w-16 h-4" />
-          <Skeleton className="w-16 h-4" />
-        </div>
+        <Skeleton className="w-16 h-4 mt-3" />
         <Skeleton className="w-full h-4" />
       </Skeleton>
+      <Skeleton className="rounded-full w-12 h-12 absolute top-2.5 right-2.5" />
     </Skeleton>
   );
 };

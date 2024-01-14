@@ -2,7 +2,6 @@ import {
   Pagination,
   PaginationContent,
   PaginationEllipsis,
-  PaginationItem,
   PaginationLink,
   PaginationNext,
   PaginationPrevious,
@@ -22,90 +21,68 @@ export const MoviePagination = ({
   return (
     <Pagination className="mt-8">
       <PaginationContent>
-        <PaginationItem>
-          <PaginationPrevious
-            href="#"
-            onClick={() => {
-              if (page !== 1) onChangePage(page - 1);
-            }}
-          />
-        </PaginationItem>
-        <PaginationItem>
-          <PaginationLink
-            onClick={() => onChangePage(1)}
-            href="#"
-            isActive={page === 1}
-          >
-            1
-          </PaginationLink>
-        </PaginationItem>
+        <PaginationPrevious
+          href="#"
+          onClick={() => {
+            if (page !== 1) onChangePage(page - 1);
+          }}
+        />
+        <PaginationLink
+          onClick={() => onChangePage(1)}
+          href="#"
+          isActive={page === 1}
+        >
+          1
+        </PaginationLink>
         {page > 2 ? (
           <>
-            <PaginationItem>
-              <PaginationEllipsis />
-            </PaginationItem>
-            <PaginationItem>
-              <PaginationLink onClick={() => onChangePage(page - 1)} href="#">
-                {page - 1}
-              </PaginationLink>
-            </PaginationItem>
-            <PaginationItem>
-              <PaginationLink
-                onClick={() => onChangePage(page)}
-                isActive
-                href="#"
-              >
-                {page}
-              </PaginationLink>
-            </PaginationItem>
-            <PaginationItem>
-              <PaginationLink onClick={() => onChangePage(page + 1)} href="#">
-                {page + 1}
-              </PaginationLink>
-            </PaginationItem>
+            <PaginationEllipsis />
+            <PaginationLink onClick={() => onChangePage(page - 1)} href="#">
+              {page - 1}
+            </PaginationLink>
+            <PaginationLink
+              onClick={() => onChangePage(page)}
+              isActive
+              href="#"
+            >
+              {page}
+            </PaginationLink>
+            <PaginationLink onClick={() => onChangePage(page + 1)} href="#">
+              {page + 1}
+            </PaginationLink>
           </>
         ) : (
           <>
-            <PaginationItem>
-              <PaginationLink
-                onClick={() => onChangePage(2)}
-                isActive={page === 2}
-                href="#"
-              >
-                2
-              </PaginationLink>
-            </PaginationItem>
-            <PaginationItem>
-              <PaginationLink
-                onClick={() => onChangePage(3)}
-                isActive={page === 3}
-                href="#"
-              >
-                3
-              </PaginationLink>
-            </PaginationItem>
+            <PaginationLink
+              onClick={() => onChangePage(2)}
+              isActive={page === 2}
+              href="#"
+            >
+              2
+            </PaginationLink>
+            <PaginationLink
+              onClick={() => onChangePage(3)}
+              isActive={page === 3}
+              href="#"
+            >
+              3
+            </PaginationLink>
           </>
         )}
-        <PaginationItem>
-          <PaginationEllipsis />
-        </PaginationItem>
-        <PaginationItem>
-          <PaginationLink
-            onClick={() => onChangePage(totalPages)}
-            isActive={page === totalPages}
-            href="#"
-          >
-            {totalPages}
-          </PaginationLink>
-        </PaginationItem>
-        <PaginationItem>
-          <PaginationNext
-            href="#"
-            onClick={() => {
-              if (page !== totalPages) onChangePage(page + 1);
-            }}
-          />
-        </PaginationItem>
+        <PaginationEllipsis />
+        <PaginationLink
+          onClick={() => onChangePage(totalPages)}
+          isActive={page === totalPages}
+          href="#"
+        >
+          {totalPages}
+        </PaginationLink>
+        <PaginationNext
+          href="#"
+          onClick={() => {
+            if (page !== totalPages) onChangePage(page + 1);
+          }}
+        />
       </PaginationContent>
     </Pagination>
   );

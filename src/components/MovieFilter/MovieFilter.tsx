@@ -1,112 +1,118 @@
-import {
-  Sheet,
-  SheetClose,
-  SheetContent,
-  SheetDescription,
-  SheetFooter,
-  SheetHeader,
-  SheetTitle,
-  SheetTrigger,
-} from "@app/components/ui/sheet";
 import { GenreType } from "@app/types/movies/movie";
 import { Button } from "@app/components/ui/button";
+import { Dispatch, SetStateAction } from "react";
 import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-} from "@app/components/ui/accordion";
-import { Checkbox } from "@app/components/ui/checkbox";
-import { useState } from "react";
-import { ScrollArea } from "@app/components/ui/scroll-area";
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectLabel,
+  SelectTrigger,
+  SelectValue,
+} from "@app/components/ui/select";
+import { CURRENT_YEAR, MIN_YEAR } from "@app/constants/time";
 
-export type Filter = {
-  genres: number[];
+export type MovieFilter = {
+  genre: string;
+  year: string;
+  rating: string;
 };
 
 type MovieFilterProps = {
   genres: GenreType[];
-  handleSubmitFilters: (filters: Filter) => void;
-  handleResetFilters: () => void;
+  filter: MovieFilter;
+  setFilter: Dispatch<SetStateAction<MovieFilter>>;
 };
 
 export const MovieFilter = ({
   genres,
-  handleSubmitFilters,
-  handleResetFilters,
+  filter,
+  setFilter,
 }: MovieFilterProps) => {
-  const [genreFilter, setGenreFilter] = useState<number[]>([]);
-  const handleChangeGenre = (genreId: number, checked: boolean | string) => {
-    if (checked) {
-      setGenreFilter([...genreFilter, genreId]);
-    } else {
-      const updatedGenres = genreFilter.filter((genre) => genre !== genreId);
-      setGenreFilter(updatedGenres);
-    }
+  const onChangeGenres = (e: string) => {
+    setFilter({ ...filter, genre: e });
   };
 
-  const handleSubmit = () => {
-    handleSubmitFilters({ genres: genreFilter });
+  const onChangeYear = (e: string) => {
+    setFilter({ ...filter, year: e });
   };
 
+  const onChangeRating = (e: string) => {
+    setFilter({ ...filter, rating: e });
+  };
+
+  const handleResetFilter = () =>
+    setFilter({ genre: "", year: "", rating: "" });
+
+  const yearsArray = Array.from(Array(CURRENT_YEAR - MIN_YEAR).keys()).map(
+    (value) => CURRENT_YEAR - value,
+  );
   return (
-    <Sheet>
-      <div className="text-end mb-4">
-        <SheetTrigger>Filters</SheetTrigger>
+    <div className="flex items-end mb-8 gap-10">
+      <div>
+        <p className="font-bold mb-4">Жанри</p>
+        <Select onValueChange={onChangeGenres} value={filter.genre}>
+          <SelectTrigger className="min-w-80">
+            <SelectValue placeholder="Жанри" />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectGroup>
+              <SelectLabel>Жанри</SelectLabel>
+              {genres.map((genre) => (
+                <SelectItem value={genre.id.toString()} key={genre.id}>
+                  {genre.name}
+                </SelectItem>
+              ))}
+            </SelectGroup>
+          </SelectContent>
+        </Select>
       </div>
-      <SheetContent>
-        <SheetHeader>
-          <SheetTitle>Filters</SheetTitle>
-        </SheetHeader>
-
-        <SheetDescription>
-          <ScrollArea className="h-[calc(100vh_-_170px)] rounded-md border p-4 mt-8">
-            <Accordion type="multiple" className="w-full">
-              <AccordionItem value="Genres">
-                <AccordionTrigger className="text-base">
-                  Genres
-                </AccordionTrigger>
-                <AccordionContent>
-                  {genres.map((genre) => (
-                    <div
-                      key={genre.id}
-                      className="flex items-center space-x-2 mb-2.5"
+      <div>
+        <p className="font-bold mb-4">Рік випуску</p>
+        <Select onValueChange={onChangeYear} value={filter.year}>
+          <SelectTrigger className="min-w-80">
+            <SelectValue placeholder="Рік випуску" />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectGroup>
+              <SelectLabel>Рік випуску</SelectLabel>
+              {yearsArray.map((year) => (
+                <SelectItem value={year.toString()} key={`year-${year}`}>
+                  {year}
+                </SelectItem>
+              ))}
+            </SelectGroup>
+          </SelectContent>
+        </Select>
+      </div>
+      <div>
+        <p className="font-bold mb-4">Рейтинг</p>
+        <Select onValueChange={onChangeRating} value={filter.rating}>
+          <SelectTrigger className="min-w-80">
+            <SelectValue placeholder="Рейтинг" />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectGroup>
+              <SelectLabel>Рейтинг</SelectLabel>
+              {Array.from(Array(10).keys())
+                .reverse()
+                .map((rating) =>
+                  rating !== 0 ? (
+                    <SelectItem
+                      value={rating.toString()}
+                      key={`rating-${rating}`}
                     >
-                      <Checkbox
-                        onCheckedChange={(checked) => {
-                          handleChangeGenre(genre.id, checked);
-                        }}
-                        checked={genreFilter.includes(genre.id)}
-                        id={genre.id.toString()}
-                      />
-                      <label
-                        htmlFor="terms"
-                        className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
-                      >
-                        {genre.name}
-                      </label>
-                    </div>
-                  ))}
-                </AccordionContent>
-              </AccordionItem>
-            </Accordion>
-          </ScrollArea>
-        </SheetDescription>
-        <SheetFooter className="absolute bottom-5 flex justify-end w-full right-5">
-          <SheetClose>
-            <Button
-              variant="secondary"
-              onClick={handleResetFilters}
-              className="mr-5"
-            >
-              Reset
-            </Button>
-          </SheetClose>
-          <SheetClose>
-            <Button onClick={handleSubmit}>Apply</Button>
-          </SheetClose>
-        </SheetFooter>
-      </SheetContent>
-    </Sheet>
+                      {rating}
+                    </SelectItem>
+                  ) : null,
+                )}
+            </SelectGroup>
+          </SelectContent>
+        </Select>
+      </div>
+      <Button onClick={handleResetFilter} variant="link">
+        Очистити фільтри
+      </Button>
+    </div>
   );
 };

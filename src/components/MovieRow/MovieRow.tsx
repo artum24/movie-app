@@ -14,7 +14,7 @@ type MovieRowProps = {
 };
 export const MovieRow = ({ movieType, title, path }: MovieRowProps) => {
   const { data: genresData } = useGenres();
-  const { data, isLoading } = useGetMoviesByType({searchType: movieType});
+  const { data, isLoading } = useGetMoviesByType({ searchType: movieType });
 
   return (
     <div className="mt-16">
@@ -31,7 +31,7 @@ export const MovieRow = ({ movieType, title, path }: MovieRowProps) => {
         <div className="flex w-max space-x-4">
           {isLoading &&
             Array.from(Array(20).keys()).map((skelet) => (
-              <MovieSkeletonCard key={skelet} />
+              <MovieSkeletonCard height={112} width={80} key={skelet} />
             ))}
           {!isLoading &&
             data?.results.map((movie) => {

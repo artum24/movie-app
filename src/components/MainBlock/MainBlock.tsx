@@ -1,9 +1,10 @@
 import { useDetailMovie } from "@app/lib/api/useDetailMovie";
 import dayjs from "dayjs";
-import { genresFormatter } from "@app/utils/genresFormatter";
+import { Badge } from "@app/components/ui/badge";
+import { FULL_DATE } from "@app/constants/time";
+
 export const MainBlock = () => {
   const { data } = useDetailMovie(572802);
-  // https://www.themoviedb.org/t/p/w1920_and_h800_multi_faces/yl2GfeCaPoxChcGyM5p7vYp1CKS.jpg
   return (
     <div>
       <div
@@ -17,12 +18,15 @@ export const MainBlock = () => {
           <p className="italic font-bold mb-8">{data?.tagline}</p>
           <p>{data?.overview}</p>
           <p className="text-gray-400 font-bold italic mt-5">
-            {data?.release_date &&
-              dayjs(data?.release_date).format("D MMMM YYYY ")}
+            {data?.release_date && dayjs(data?.release_date).format(FULL_DATE)}
           </p>
-          <p className="mt-5 font-bold">
-            {genresFormatter(data?.genres || [])}
-          </p>
+          <div className="mt-5 font-bold flex gap-4">
+            {data?.genres.map((genre) => (
+              <Badge variant="secondary" key={genre.id}>
+                {genre.name}
+              </Badge>
+            ))}
+          </div>
         </div>
       </div>
     </div>
