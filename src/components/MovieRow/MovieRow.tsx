@@ -1,11 +1,10 @@
 import { useGetMoviesByType } from "@app/lib/api/useGetMoviesByType";
-import { MovieCard } from "@app/components/MovieCard/MovieCard";
 import { useGenres } from "@app/lib/api/useGenres";
-import { GenreType } from "@app/types/movies/movie";
 import { ScrollArea, ScrollBar } from "../ui/scroll-area";
 import { MovieSkeletonCard } from "@app/components/MovieCard/MovieSkeletonCard";
 import Link from "next/link";
 import { MoviePageType } from "@app/types/movies/params";
+import { MovieList } from "@app/components/MovieList/MovieList";
 
 type MovieRowProps = {
   movieType: MoviePageType;
@@ -33,25 +32,9 @@ export const MovieRow = ({ movieType, title, path }: MovieRowProps) => {
             Array.from(Array(20).keys()).map((skelet) => (
               <MovieSkeletonCard height={112} width={80} key={skelet} />
             ))}
-          {!isLoading &&
-            data?.results.map((movie) => {
-              const movieGenres: GenreType[] = [];
-              movie.genre_ids.forEach((genreId) => {
-                const selectedGenre = genresData?.genres.find(
-                  (movieGenre) => movieGenre.id === genreId,
-                );
-                if (selectedGenre) {
-                  movieGenres.push(selectedGenre);
-                }
-              });
-              return (
-                <MovieCard
-                  key={movie.id}
-                  movie={movie}
-                  movieGenres={movieGenres}
-                />
-              );
-            })}
+          {!isLoading && (
+            <MovieList movies={data?.results} genres={genresData?.genres} />
+          )}
         </div>
         <ScrollBar orientation="horizontal" />
       </ScrollArea>

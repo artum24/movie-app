@@ -5,9 +5,8 @@ import { LogoIcon } from "@app/icons/Logo";
 import { headerLinks } from "@app/constants/headerLinks";
 
 export const Header = () => {
-
   return (
-    <div className="mt-2">
+    <header className="mt-2">
       <div className="flex justify-between px-5 sm:px-10 xl:px-40 border-b-neutral-600 items-center">
         <Link href="/">
           <LogoIcon />
@@ -24,6 +23,6 @@ export const Header = () => {
         </div>
       </div>
       <Separator className="mt-2" />
-    </div>
+    </header>
   );
 };

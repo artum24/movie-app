@@ -1,6 +1,4 @@
 import { useState } from "react";
-import { GenreType } from "@app/types/movies/movie";
-import { MovieCard } from "@app/components/MovieCard/MovieCard";
 import { MovieSkeletonCard } from "@app/components/MovieCard/MovieSkeletonCard";
 import { MovieFilter } from "@app/components/MovieFilter/MovieFilter";
 import { useGenres } from "@app/lib/api/useGenres";
@@ -9,6 +7,7 @@ import { useGetMoviesByType } from "@app/lib/api/useGetMoviesByType";
 import { useRouter } from "next/router";
 import { GetServerSideProps } from "next";
 import { MoviePageType } from "@app/types/movies/params";
+import { MovieList } from "@app/components/MovieList/MovieList";
 
 export default function Home() {
   const { query } = useRouter();
@@ -44,26 +43,13 @@ export default function Home() {
           Array.from(Array(20).keys()).map((skelet) => (
             <MovieSkeletonCard key={skelet} />
           ))}
-        {!isLoading &&
-          moviesData?.results?.map((movie) => {
-            const movieGenres: GenreType[] = [];
-            movie.genre_ids.forEach((genreId) => {
-              const selectedGenre = genresData?.genres.find(
-                (movieGenre) => movieGenre.id === genreId,
-              );
-              if (selectedGenre) {
-                movieGenres.push(selectedGenre);
-              }
-            });
-            return (
-              <MovieCard
-                imageStyles="w-full"
-                movieGenres={movieGenres}
-                movie={movie}
-                key={movie.id}
-              />
-            );
-          })}
+        {!isLoading && (
+          <MovieList
+            genres={genresData?.genres || []}
+            movies={moviesData?.results || []}
+            imageStyles="w-full"
+          />
+        )}
       </div>
       {moviesData?.total_pages && (
         <MoviePagination

@@ -4,7 +4,9 @@ export default function Document() {
     <Html lang="en" className="dark">
       <Head />
       <body>
-        <Main />
+        <main>
+          <Main />
+        </main>
         <NextScript />
       </body>
     </Html>
