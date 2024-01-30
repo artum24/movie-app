@@ -48,11 +48,11 @@ export const MovieFilter = ({
     (value) => CURRENT_YEAR - value,
   );
   return (
-    <div className="flex items-end mb-8 gap-10">
-      <div>
+    <div className="flex items-end mb-8 gap-x-10 gap-y-3 flex-wrap">
+      <div className="w-full sm:w-auto">
         <p className="font-bold mb-4">Жанри</p>
         <Select onValueChange={onChangeGenres} value={filter.genre}>
-          <SelectTrigger className="min-w-80">
+          <SelectTrigger className="min-w-60">
             <SelectValue placeholder="Жанри" />
           </SelectTrigger>
           <SelectContent>
@@ -67,10 +67,10 @@ export const MovieFilter = ({
           </SelectContent>
         </Select>
       </div>
-      <div>
+      <div className="w-full sm:w-auto">
         <p className="font-bold mb-4">Рік випуску</p>
         <Select onValueChange={onChangeYear} value={filter.year}>
-          <SelectTrigger className="min-w-80">
+          <SelectTrigger className="min-w-60">
             <SelectValue placeholder="Рік випуску" />
           </SelectTrigger>
           <SelectContent>
@@ -85,10 +85,10 @@ export const MovieFilter = ({
           </SelectContent>
         </Select>
       </div>
-      <div>
+      <div className="w-full sm:w-auto">
         <p className="font-bold mb-4">Рейтинг</p>
         <Select onValueChange={onChangeRating} value={filter.rating}>
-          <SelectTrigger className="min-w-80">
+          <SelectTrigger className="min-w-60">
             <SelectValue placeholder="Рейтинг" />
           </SelectTrigger>
           <SelectContent>

@@ -11,7 +11,7 @@ export const Header = () => {
         <Link href="/">
           <LogoIcon />
         </Link>
-        <div className="flex gap-5">
+        <div className="hidden md:flex gap-5">
           {headerLinks.map((link, index) => (
             <Fragment key={link.name}>
               <Link href={link.path}>{link.name}</Link>

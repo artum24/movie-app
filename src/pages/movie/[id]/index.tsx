@@ -51,10 +51,10 @@ const MoviePage = () => {
     similarData?.results.filter((item) => item.vote_count > 500) || [];
   return (
     <div className="px-5 sm:px-10 xl:px-40 my-8 md:my-12 mb-32">
-      <div className="mb-8 flex gap-10">
+      <div className="mb-8 block sm:flex gap-10">
         <div className="relative">
           {isLoading ? (
-            <Skeleton className="w-[450px] h-[675px]" />
+            <Skeleton className="w-full sm:w-[450px] h-[675px] mb-5 sm:mb-0" />
           ) : (
             <>
               <Image
@@ -62,7 +62,7 @@ const MoviePage = () => {
                 alt={`image-${movieData?.title}`}
                 height={700}
                 width={450}
-                className="rounded-xl"
+                className="rounded-xl w-full mb-5 sm:mb-0"
               />
               <ProgressBar
                 value={Number(movieData?.vote_average.toFixed(1) || 0)}
@@ -80,6 +80,7 @@ const MoviePage = () => {
             <Skeleton className="mb-6 h-5 w-full" />
             <Skeleton className="mt-5 h-5 w-full" />
             <div className="flex mt-5 gap-14">
+              <Skeleton className="h-32 w-32" />
               <Skeleton className="h-32 w-32" />
               <Skeleton className="h-32 w-32" />
             </div>

@@ -38,7 +38,7 @@ export default function Home() {
         filter={filter}
         genres={genresData?.genres || []}
       />
-      <div className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-5 md:gap-9">
+      <div className="grid grid-cols-1 sm:grid-cols-2x md:grid-cols-3 xl:grid-cols-4 gap-5 md:gap-9">
         {isLoading &&
           Array.from(Array(20).keys()).map((skelet) => (
             <MovieSkeletonCard key={skelet} />
