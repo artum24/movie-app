@@ -107,7 +107,7 @@ const MoviePage = () => {
               <span className="font-bold">Час:</span>{" "}
               {timeFormatter(movieData?.runtime || 0)}
             </p>
-            <div className="mt-5 font-bold flex gap-4">
+            <div className="mt-5 font-bold flex gap-4 flex-wrap">
               {movieData?.genres.map((genre) => (
                 <Badge variant="secondary" key={genre.id}>
                   {genre.name}
