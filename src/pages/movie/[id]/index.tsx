@@ -20,6 +20,7 @@ import { useCollection } from "@app/lib/api/useCollection";
 import { Skeleton } from "@app/components/ui/skeleton";
 
 const MoviePage = () => {
+  const {push} = useRouter();
   const { query } = useRouter();
   const { data: movieData, isLoading: movieLoading } = useDetailMovie(
     Number(query.id),
@@ -49,10 +50,13 @@ const MoviePage = () => {
     .join(", ");
   const similarMovieList =
     similarData?.results.filter((item) => item.vote_count > 500) || [];
+  const handleCastClick = (castId: number) => {
+    push(`/casts/${castId}`)
+  }
   return (
     <div className="px-5 sm:px-10 xl:px-40 my-8 md:my-12 mb-32">
       <div className="mb-8 block sm:flex gap-10">
-        <div className="relative">
+        <div className="relative w-full sm:w-[500px]">
           {isLoading ? (
             <Skeleton className="w-full sm:w-[450px] h-[675px] mb-5 sm:mb-0" />
           ) : (
@@ -61,7 +65,7 @@ const MoviePage = () => {
                 src={`https://image.tmdb.org/t/p/w780${movieData?.poster_path}`}
                 alt={`image-${movieData?.title}`}
                 height={700}
-                width={450}
+                width={500}
                 className="rounded-xl w-full mb-5 sm:mb-0"
               />
               <ProgressBar
@@ -157,6 +161,7 @@ const MoviePage = () => {
                   <Card
                     key={actor.id}
                     className="relative cursor-pointer shadow-2xl"
+                    onClick={() => handleCastClick(actor.id)}
                   >
                     <Image
                       width={200}

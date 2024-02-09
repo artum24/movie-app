@@ -20,3 +20,6 @@ export const getCollection = (id: string) =>
   instance.get(`collection/${id}?language=uk`);
 
 export const getGenres = () => instance.get("genre/movie/list?language=uk");
+
+export const getDetailCast = (id: string) =>
+  instance.get(`person/${id}?language=uk&append_to_response=movie_credits%2Cimages%2Cexternal_ids`);

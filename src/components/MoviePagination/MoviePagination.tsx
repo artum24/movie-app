@@ -26,7 +26,7 @@ export const MoviePagination = ({
           onClick={() => {
             if (page !== 1) onChangePage(page - 1);
           }}
-          className="hidden md:block"
+          className="hidden md:flex"
         />
         <PaginationLink
           onClick={() => onChangePage(1)}
@@ -83,7 +83,7 @@ export const MoviePagination = ({
           onClick={() => {
             if (page !== totalPages) onChangePage(page + 1);
           }}
-          className="hidden md:block"
+          className="hidden md:flex"
         />
       </PaginationContent>
     </Pagination>
