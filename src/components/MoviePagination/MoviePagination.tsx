@@ -4,33 +4,33 @@ import {
   PaginationEllipsis,
   PaginationLink,
   PaginationNext,
-  PaginationPrevious,
-} from "@app/components/ui/pagination";
+  PaginationPrevious
+} from '@app/components/ui/pagination'
 
 type MoviePaginationProps = {
-  onChangePage: (page: number) => void;
-  page: number;
-  totalPages: number;
-};
+  onChangePage: (page: number) => void
+  page: number
+  totalPages: number
+}
 
 export const MoviePagination = ({
   page,
   onChangePage,
-  totalPages,
+  totalPages
 }: MoviePaginationProps) => {
   return (
-    <Pagination className="mt-8">
+    <Pagination className='mt-8'>
       <PaginationContent>
         <PaginationPrevious
-          href="#"
+          href='#'
           onClick={() => {
-            if (page !== 1) onChangePage(page - 1);
+            if (page !== 1) onChangePage(page - 1)
           }}
-          className="hidden md:flex"
+          className='hidden md:flex'
         />
         <PaginationLink
           onClick={() => onChangePage(1)}
-          href="#"
+          href='#'
           isActive={page === 1}
         >
           1
@@ -38,17 +38,17 @@ export const MoviePagination = ({
         {page > 2 ? (
           <>
             <PaginationEllipsis />
-            <PaginationLink onClick={() => onChangePage(page - 1)} href="#">
+            <PaginationLink onClick={() => onChangePage(page - 1)} href='#'>
               {page - 1}
             </PaginationLink>
             <PaginationLink
               onClick={() => onChangePage(page)}
               isActive
-              href="#"
+              href='#'
             >
               {page}
             </PaginationLink>
-            <PaginationLink onClick={() => onChangePage(page + 1)} href="#">
+            <PaginationLink onClick={() => onChangePage(page + 1)} href='#'>
               {page + 1}
             </PaginationLink>
           </>
@@ -57,14 +57,14 @@ export const MoviePagination = ({
             <PaginationLink
               onClick={() => onChangePage(2)}
               isActive={page === 2}
-              href="#"
+              href='#'
             >
               2
             </PaginationLink>
             <PaginationLink
               onClick={() => onChangePage(3)}
               isActive={page === 3}
-              href="#"
+              href='#'
             >
               3
             </PaginationLink>
@@ -74,18 +74,18 @@ export const MoviePagination = ({
         <PaginationLink
           onClick={() => onChangePage(totalPages)}
           isActive={page === totalPages}
-          href="#"
+          href='#'
         >
           {totalPages}
         </PaginationLink>
         <PaginationNext
-          href="#"
+          href='#'
           onClick={() => {
-            if (page !== totalPages) onChangePage(page + 1);
+            if (page !== totalPages) onChangePage(page + 1)
           }}
-          className="hidden md:flex"
+          className='hidden md:flex'
         />
       </PaginationContent>
     </Pagination>
-  );
-};
+  )
+}

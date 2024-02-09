@@ -1,1 +1,1 @@
-const GenresList = () => {};
+const GenresList = () => {}

@@ -2,56 +2,56 @@ import {
   MoviePageType,
   MovieParamKeys,
   MovieParamType,
-  MovieParamsType,
-} from "@app/types/movies/params";
+  MovieParamsType
+} from '@app/types/movies/params'
 
 const formatParam = (
   param: MovieParamType,
-  value?: MovieParamsType[MovieParamKeys],
+  value?: MovieParamsType[MovieParamKeys]
 ) => {
   switch (param) {
-    case "with_genres": {
+    case 'with_genres': {
       return `${param}=${
-        Array.isArray(value) ? value?.join("%2C") : value || ""
-      }`;
+        Array.isArray(value) ? value?.join('%2C') : value || ''
+      }`
     }
-    case "primary_release_date": {
-      const currentDate = new Date().toISOString().split("T")[0];
+    case 'primary_release_date': {
+      const currentDate = new Date().toISOString().split('T')[0]
 
-      return `${param}=${currentDate}`;
+      return `${param}=${currentDate}`
     }
-    case "page": {
-      return `${param}=${value || 1}`;
+    case 'page': {
+      return `${param}=${value || 1}`
     }
-    case "language":
-    case "sort_by":
-    case "vote_count.gte":
+    case 'language':
+    case 'sort_by':
+    case 'vote_count.gte':
     default: {
-      return `${param}=${value}`;
+      return `${param}=${value}`
     }
   }
-};
+}
 export const buildQueryParams = (params: MovieParamsType) => {
-  const keys = Object.keys(params) as MovieParamType[];
+  const keys = Object.keys(params) as MovieParamType[]
   return keys
     .filter((param) => params[param])
     .map((param) => {
-      return formatParam(param, params[param]);
+      return formatParam(param, params[param])
     })
-    .join("&");
-};
+    .join('&')
+}
 
 export const getSortByParam = (type: MoviePageType) => {
   switch (type) {
-    case "popular": {
-      return "popularity.desc";
+    case 'popular': {
+      return 'popularity.desc'
     }
-    case "top-rated": {
-      return "vote_average.desc";
+    case 'top-rated': {
+      return 'vote_average.desc'
     }
-    case "upcoming":
+    case 'upcoming':
     default: {
-      return "primary_release_date.desc";
+      return 'primary_release_date.desc'
     }
   }
-};
+}
